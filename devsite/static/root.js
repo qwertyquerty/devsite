@@ -32,3 +32,99 @@ window.onload = function () {
 		}
 	});
 }
+
+
+// Lemonade Tycoon
+var lemonade = 0;
+var lemonade_sold = 0;
+var cash = 0;
+var workers = 0;
+var worker_cost = Math.floor(10 * Math.pow(1.1, workers));
+
+function lt_update_labels(){
+	$("#lt_lemonade").html(lemonade);
+	$("#lt_workers").html(workers);
+	$("#lt_cash").html("$"+cash);
+	$("#lt_worker_cost").html("$"+worker_cost);
+	$("#lt_sold_lemonade").html(lemonade_sold);
+}
+
+function lt_make_lemonade(number){
+	lemonade += number;
+	lt_update_labels();
+}
+
+function lt_sell_lemonade(sold){
+	if(lemonade > 0) {
+		lemonade -= sold;
+		lemonade_sold += sold;
+		
+		if(workers > 1) {
+			cash += 1.0 * sold;
+		}
+		else {
+			cash += 1.0;
+		}
+	}
+	lt_update_labels();
+}
+
+function lt_hire_worker() {
+	if(cash >= worker_cost) {
+		workers += 1;
+		cash -= worker_cost;
+	}
+	var nextCost = Math.floor(10 * Math.pow(1.1, workers));
+	worker_cost = nextCost;
+	lt_update_labels()
+}
+
+
+function lt_save(){
+	var saveData = {
+		lemonade: lemonade,
+		lemonade_sold: lemonade_sold,
+		cash: cash,
+		workers: workers,
+		worker_cost: worker_cost
+	};
+	
+	localStorage.setItem("save", JSON.stringify(saveData));
+}
+
+function lt_load(){
+	var saveGame = JSON.parse(localStorage.getItem("save"));
+	if(saveGame) {
+		if(typeof saveGame.lemonade !== "undefined") lemonade = saveGame.lemonade;
+		if(typeof saveGame.lemonade_sold !== "undefined") lemonade_sold = saveGame.lemonade_sold;
+		if(typeof saveGame.cash !== "undefined") cash = saveGame.cash;
+		if(typeof saveGame.workers !== "undefined") workers = saveGame.workers;
+		if(typeof saveGame.worker_cost !== "undefined") worker_cost = saveGame.worker_cost;
+		lt_update_labels();
+	}
+};
+
+function lt_reset(){
+	lemonade = 0;
+	workers = 0;
+	cash = 0;
+	lemonade_sold = 0;
+	lt_save()
+	lt_update_labels();
+}
+
+$(document).ready(function() {
+	lt_load();
+
+	window.setInterval(function(){
+		lt_make_lemonade(workers);
+			
+		if(workers > 2) {
+			lt_sell_lemonade(Math.floor(workers / 2));
+		}
+		
+		lt_update_labels();
+	}, 1000);
+
+	lt_update_labels();
+});
