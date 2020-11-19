@@ -113,6 +113,27 @@ function lt_reset(){
 	lt_update_labels();
 }
 
+
+
+
+// MOD PLAYER
+var mp_audio = new Audio("/static/kapchiptune.ogg");
+
+function mp_play() {
+	if (mp_audio.paused) {
+		mp_audio.play();
+	}
+}
+
+function mp_pause() {
+	mp_audio.pause();
+}
+
+function mp_stop() {
+	mp_audio.pause();
+	mp_audio.currentTime = 0;
+}
+
 $(document).ready(function() {
 	lt_load();
 
@@ -125,6 +146,11 @@ $(document).ready(function() {
 		
 		lt_update_labels();
 	}, 1000);
+
+	window.setInterval(() => {
+		$("#mp_progress").css("width", mp_audio.currentTime / mp_audio.duration * 100 + "%");
+		$("#mp_position").html("0x"+Math.floor(mp_audio.currentTime*100).toString(16))
+	}, 50);
 
 	lt_update_labels();
 });
