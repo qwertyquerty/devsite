@@ -1,0 +1,135 @@
+{% extends "layout.html" %}
+
+{% block title %}qwerty{% endblock %}
+
+{% block head %}
+<script src="/static/root.js"></script>
+<link rel="stylesheet" href="/static/main.css">
+{% endblock %}
+
+{% block content %}
+<div style="padding: 40px 0px;">
+
+	<div class="row">
+		<div class="col s7 m7 l8">
+			<div class="tui-window" style="text-align: left; width: 100%;">
+				<fieldset class="tui-fieldset">
+					<legend class="center">README.TXT*</legend>
+
+					<span v-cloak class="tui-fieldset-text top left">[QIM 1.2.1]</span>
+
+					<span v-cloak class="tui-fieldset-text top right" style="margin-right: 60px">${readme_length}B</span>
+
+					<span class="tui-fieldset-button right"><span class="green-255-text">■</span></span>
+
+<textarea id="readme" v-on:input="update_readme_length" class="tui-textarea" rows="13" style="resize: none; width: 100%;">#./?
+Hello and welcome to my personal developer site. I figured I would eventually have to at least put something here. I hope you like this site because it took a lot of work. How you got here? Who knows, who cares.
+
+I am mainly a Python developer, but I study and have hobbies in the majority of computer science areas
+
+I mostly work on personal projects but have done freelance work in the past, and am usually up for hire
+
+If you want to talk to me you can usually contact me on Discord at qwerty#6768, or shoot an email to qwertytrogi@gmail.com
+
+/*---------------------------*/
+
+If you are kind stranger and have gold feel free to (please) send it to BTC 3MbyLtHEVbxc1rWgspXDqE7kgWVERHZ7VD</textarea>
+				
+				</fieldset>
+			</div>
+		</div>
+
+		<div class="col s5 m5 l4">
+			<div class="tui-window" style="text-align: left; width: 100%;">
+				<fieldset class="tui-fieldset">
+					<legend class="center">[System Metrics]</legend>
+
+					<div v-if="!metrics">
+						Loading ........:
+						<div class="tui-progress-bar inline-block valign-middle">
+							<span class="tui-indeterminate"></span>
+						</div>
+					</div>
+
+					<div v-cloak v-if="metrics" v-for="(core, index) in metrics.cpu">
+						CPU ${index} ..........:
+						<div class="tui-progress-bar inline-block valign-middle">
+							<span class="tui-progress-label">${core.toFixed(1)}%</span>
+							<span class="tui-progress" :style="{'width': core+'%'}"></span>
+						</div><br><br>
+					</div>
+
+					<div v-cloak v-if="metrics">
+						RAM ............:
+						<div class="tui-progress-bar inline-block valign-middle">
+							<span class="tui-progress-label">${metrics.ram.toFixed(1)}%</span>
+							<span class="tui-progress" :style="{'width': metrics.ram+'%'}"></span>
+						</div><br><br>
+					</div>
+
+					<div v-cloak v-if="metrics">
+						/dev/vda1 ......:
+						<div class="tui-progress-bar inline-block valign-middle green-168">
+							<span class="tui-progress-label">${metrics.disk.toFixed(1)}%</span>
+							<span class="tui-progress green-255" :style="{'width': metrics.disk+'%'}"></span>
+						</div>
+					</div>
+
+				</fieldset>
+			</div>
+		</div>
+	</div>
+
+	
+	<div class="row">
+		<div class="col s7 m7 l8"></div>
+		<div class="col s5 m5 l4">
+			<div class="tui-window" style="text-align: left; width: 100%;">
+				<fieldset class="tui-fieldset">
+					<legend class="center">[External Links]</legend>
+
+					<div class="center">
+						<div>[Contact]</div>
+						<br>
+						<a class="bracket-link" href="https://github.com/qwertyquerty">Github Page</a>
+						<a class="bracket-link" href="https://discord.gg/JF3kg77">Discord Server</a>
+						<a class="bracket-link" href="mailto:qwertytrogi@gmail.com">Email Me</a>
+						<br><hr>
+
+						<div>[Social]</div>
+						<br>
+						<a class="bracket-link" href="https://www.youtube.com/channel/UCPYbhBUGhH7n_G4HLK2YipQ">YouTube</a>
+						<a class="bracket-link" href="https://www.twitch.tv/qwertyquerty">Twitch</a>
+						<a class="bracket-link" href="https://www.reddit.com/u/qwerty_trogi">Reddit</a>
+						<br><hr>
+
+						<div>[ChessBot]</div>
+						<br>
+						<a class="bracket-link" href="http://chess.qtqt.cf/">ChessBot Site</a>
+						<a class="bracket-link" href="https://discord.gg/uV5y7RY">Discord Server</a>
+						<a class="bracket-link" href="https://top.gg/bot/chess">Listing Page</a>
+						<a class="bracket-link" href="https://github.com/qwertyquerty/ChessBot">Github Repo</a>
+						<br><hr>
+
+						<div>[BeeStation 13]</div>
+						<br>
+						<a class="bracket-link" href="https://beestation13.com/">Website</a>
+						<a class="bracket-link" href="https://discord.gg/Y7RTtkK">Discord Server</a>
+						<a class="bracket-link" href="https://github.com/BeeStation/BeeStation-Hornet">Github Repo</a>
+						<br><hr>
+
+						<div>[Other]</div>
+						<br>
+						<a class="bracket-link" href="http://static.qtqt.cf/">Static Files</a>
+						<a class="bracket-link" href="http://chumbis.qtqt.cf/">Chumbis</a>
+						<a class="bracket-link" href="http://data.qtqt.cf/">Kibana</a>
+						<br><hr>
+
+					</div>
+					
+				</fieldset>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

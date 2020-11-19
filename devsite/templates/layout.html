@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" class="tui-bg-blue-black">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>qwerty</title>
+
+		<script src="/static/packages/jquery.min.js"></script>
+		<script src="/static/packages/vue.js"></script>
+		<script src="/static/packages/tuicss.min.js"></script>
+
+		<link rel="stylesheet" href="/static/packages/tuicss.min.css">
+		
+		{% block head %}
+		{% endblock %}
+	</head>
+
+	<body>
+		<div id="app">
+			<nav class="tui-nav absolute">
+				<span class="tui-datetime" data-format="h:m:s a"></span>
+				<ul>
+					<a class="red-168-text" href="/">
+						[<label class="black-text">{% block title %}{% endblock %}</label>]
+					</a>
+
+					<li class="tui-dropdown">
+						<span class="red-168-text">F</span>ile
+						<div class="tui-dropdown-content">
+							<ul>
+								<li>
+									<a href="javascript:window.open('')">
+										<span class="red-168-text">N</span>ew
+									</a>
+								</li>
+								<li>
+									<a href="http://static.qtqt.cf">
+										<span class="red-168-text">O</span>pen...
+										<span class="tui-shortcut">F3</span>
+									</a>
+								</li>
+								<li>
+									<a href="#!">
+										<span class="red-168-text">S</span>ave
+										<span class="tui-shortcut">F2</span>
+									</a>
+								</li>
+								<li>
+									<a href="#!">
+										S<span class="red-168-text">a</span>ve as...
+									</a>
+								</li>
+								<li>
+									<a href="#!">
+										Save a<span class="red-168-text">l</span>l
+									</a>
+								</li>
+
+								<div class="tui-black-divider"></div>
+
+								<li>
+									<a href="javascript:$('body').remove()">
+										<span class="red-168-text">Q</span>uit
+										<span class="tui-shortcut">F10</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li class="tui-dropdown">
+						<span class="red-168-text">P</span>rojects
+					</li>
+					<li class="tui-dropdown">
+						<span class="red-168-text">C</span>ontact
+					</li>
+					<li class="tui-dropdown">
+						<span class="red-168-text">D</span>ebug
+					</li>
+				</ul>
+			</nav>
+
+			{% block content %}
+			{% endblock %}
+		</div>
+	</body>
+</html>

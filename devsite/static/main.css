@@ -1,0 +1,32 @@
+[v-cloak] {display: none}
+
+* {
+	user-select: none !important;
+}
+
+.bracket-link {
+	color: #00A800;
+	white-space: nowrap;
+}
+
+.bracket-link:hover {
+	color: #00FF00;
+}
+
+.bracket-link::before {
+	content: "[";
+	color: #FFFFFF;
+}
+
+.bracket-link:active::before {
+	color: #00A8A8;
+}
+
+.bracket-link::after {
+	content: "]";
+	color: #FFFFFF;
+}
+
+.bracket-link:active::after {
+	color: #00A8A8;
+}
