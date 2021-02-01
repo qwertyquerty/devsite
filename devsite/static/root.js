@@ -17,8 +17,7 @@ window.onload = function () {
 			},
 
 			update_readme_length: function (evt) {
-				this.readme_length = (new Blob([evt.target.value.getBytes()])).size;
-				console.log("a");
+				this.readme_length = (new Blob([evt.target.value])).size;
 			}
 		},
 
