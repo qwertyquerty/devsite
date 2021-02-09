@@ -7,6 +7,10 @@ app = Flask(__name__)
 def page_root():
 	return render_template("root.html", debug=True)
 
+@app.route("/contact")
+def page_contact():
+	return render_template("contact.html", debug=True)
+
 @app.route("/static/<path:path>")
 def send_static_content(path):
     return send_from_directory("static", path)
