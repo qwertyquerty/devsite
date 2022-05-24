@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+
+{% block title %}qwerty{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="/static/main.css">
+
+<script>
+var mp_audio = new Audio("https://static.qtqt.cf/music/{{song}}");
+
+function mp_play() {
+	if (mp_audio.paused) {
+		mp_audio.play();
+	}
+}
+
+function mp_pause() {
+	mp_audio.pause();
+}
+
+function mp_stop() {
+	mp_audio.pause();
+	mp_audio.currentTime = 0;
+}
+
+window.setInterval(() => {
+	$("#mp_progress").css("width", mp_audio.currentTime / mp_audio.duration * 100 + "%");
+	$("#mp_position").html("0x"+Math.floor(mp_audio.currentTime*100).toString(16))
+}, 50);
+</script>
+{% endblock %}
+
+{% block content %}
+<div style="padding: 40px 40px;">
+	<div class="tui-window" style="text-align: left; width: 100%;">
+		<fieldset class="tui-fieldset">
+			<legend class="center">{{ song.upper() }}</legend>
+
+			<span v-cloak class="tui-fieldset-text top left">[MPLYR]</span>
+
+			Progress:
+			<br>
+			<div class="tui-progress-bar inline-block valign-middle" style="width:100%;">
+				<span class="tui-progress" id="mp_progress" style="width:0%;"></span>
+			</div><br>
+
+			<hr>
+
+			File: <span>{{ song.upper() }}</span><br>
+			Position: <span id="mp_position"></span><br>
+			<hr> 
+			<button class="tui-button green-168 white-text" onClick="mp_play()">Play</button>
+			<button class="tui-button yellow-168 white-text" onClick="mp_pause()">Pause</button>
+			<button class="tui-button red-168 white-text" onClick="mp_stop()">Stop</button>
+		</fieldset>
+	</div>
+</div>
+{% endblock %}

@@ -24,4 +24,7 @@ def page_api_metrics():
 	}
 
 	return jsonify(response)
-	
+
+@app.route("/player/<path:song>")
+def page_song_player(song):
+	return render_template("player.html", song=song)
